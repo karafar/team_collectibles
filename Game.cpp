@@ -243,6 +243,8 @@ void Game::render()
 	playerHealth.setPosition(300, HEIGHT + 40);
 	window.draw(scoreLabel);
 	window.draw(playerHealth);
+
+	bluePot.move();
 	window.draw(bluePot.getSprite());
 
 	window.draw(orangePot.getSprite());
