@@ -12,10 +12,14 @@
 #include "Person.hpp"
 #include "Monster.hpp"
 #include "Settings.hpp"
+#include "OrangePotion.cpp"
 #include <iostream>
 #include <random>
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
+
+OrangePotion op = OrangePotion(100,500);
+
 
 /*
  * Default constructor.  Creates our window and sets up
@@ -232,5 +236,6 @@ void Game::render()
 	window.draw(scoreLabel);
 	window.draw(playerHealth);
 
+	window.draw(op.getSprite());
 	window.display();
 }
