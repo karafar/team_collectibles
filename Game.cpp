@@ -1,6 +1,6 @@
 /*
  * Game.cpp
- * Much code taken from SFML tutorials on SFML site.  Basic 
+ * Much code taken from SFML utorials on SFML site.  Basic 
  * flow tutorial at 
  * from https://maksimdan.gitbooks.io/sfml-and-gamedevelopement/content/game_class.html
  *
@@ -12,10 +12,16 @@
 #include "Person.hpp"
 #include "Monster.hpp"
 #include "Settings.hpp"
+#include "OrangePotion.cpp"
+
+
 #include <iostream>
 #include <random>
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
+
+OrangePotion orangePot(100,200);
+
 
 /*
  * Default constructor.  Creates our window and sets up
@@ -191,6 +197,8 @@ void Game::processEvents()
 
 void Game::update()
 {
+//	bluePot.move();
+	orangePot.update(player);
 	for(auto it = monsters.begin(); it != monsters.end(); ++it){
 		if(Collision::BoundingBoxTest(player.getSprite(), it->getSprite())){
 			player.harm(20);
@@ -198,6 +206,8 @@ void Game::update()
 			std::random_device rd;
 			std::mt19937 engine(rd());
 			player.updatePosition(distribution(engine), distribution(engine));
+			
+	
 		}
 	}
 	if(player.getHealth() <= 0){
@@ -232,5 +242,6 @@ void Game::render()
 	window.draw(scoreLabel);
 	window.draw(playerHealth);
 
+	orangePot.render(window);
 	window.display();
 }
