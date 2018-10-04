@@ -12,6 +12,11 @@
 #include "Person.hpp"
 #include "Monster.hpp"
 #include "Settings.hpp"
+//myline
+#include "BluePotion.cpp"
+BluePotion bluePot(150, 150);
+
+
 #include <iostream>
 #include <random>
 #include "SFML/Audio.hpp"
@@ -191,6 +196,7 @@ void Game::processEvents()
 
 void Game::update()
 {
+//	bluePot.move();
 	for(auto it = monsters.begin(); it != monsters.end(); ++it){
 		if(Collision::BoundingBoxTest(player.getSprite(), it->getSprite())){
 			player.harm(20);
@@ -198,6 +204,8 @@ void Game::update()
 			std::random_device rd;
 			std::mt19937 engine(rd());
 			player.updatePosition(distribution(engine), distribution(engine));
+			
+	
 		}
 	}
 	if(player.getHealth() <= 0){
@@ -231,6 +239,7 @@ void Game::render()
 	playerHealth.setPosition(300, HEIGHT + 40);
 	window.draw(scoreLabel);
 	window.draw(playerHealth);
+	window.draw(bluePot.getSprite());
 
 	window.display();
 }
