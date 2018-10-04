@@ -43,19 +43,9 @@ public:
 	}
 
 	void move() {
-		//animation for bouncing here
-		//int bounce = 3;
-		/*elapsedTime++;
-		/if(elapsedTime == 10) {
-			elapsedTime = 0;
-			bounce *= -1;
-		}
-		*/
 		this->bounce *= -1;
 		y += bounce;
 		sprite.setPosition(x, y);	
-		//std::cout << "(x,y)" << x << ", " << y << std::endl;
-		//std::cout << " Elapsed: " << elapsedTime << std::endl;
 	}
 
 	void activate(Person &person) {
@@ -79,7 +69,7 @@ private:
 	sf::Sprite sprite;
 	sf::Texture texture;
 
-	int bounce = 3;	
+	int bounce = 1;	
 	int x = 300;
 	int y = 300;
 
