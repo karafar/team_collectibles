@@ -1,6 +1,6 @@
 /*
  * Game.cpp
- * Much code taken from SFML tutorials on SFML site.  Basic 
+ * Much code taken from SFML utorials on SFML site.  Basic 
  * flow tutorial at 
  * from https://maksimdan.gitbooks.io/sfml-and-gamedevelopement/content/game_class.html
  *
@@ -13,12 +13,17 @@
 #include "Monster.hpp"
 #include "Settings.hpp"
 #include "OrangePotion.cpp"
+//myline
+#include "BluePotion.cpp"
+BluePotion bluePot(150,150);
+
+
 #include <iostream>
 #include <random>
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
 
-OrangePotion op = OrangePotion(100,500);
+OrangePotion orangePot(100,200);
 
 
 /*
@@ -195,6 +200,7 @@ void Game::processEvents()
 
 void Game::update()
 {
+//	bluePot.move();
 	for(auto it = monsters.begin(); it != monsters.end(); ++it){
 		if(Collision::BoundingBoxTest(player.getSprite(), it->getSprite())){
 			player.harm(20);
@@ -202,6 +208,8 @@ void Game::update()
 			std::random_device rd;
 			std::mt19937 engine(rd());
 			player.updatePosition(distribution(engine), distribution(engine));
+			
+	
 		}
 	}
 	if(player.getHealth() <= 0){
@@ -235,7 +243,8 @@ void Game::render()
 	playerHealth.setPosition(300, HEIGHT + 40);
 	window.draw(scoreLabel);
 	window.draw(playerHealth);
+	window.draw(bluePot.getSprite());
 
-	window.draw(op.getSprite());
+	window.draw(orangePot.getSprite());
 	window.display();
 }
