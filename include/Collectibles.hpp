@@ -26,7 +26,7 @@ public:
 	virtual void update(Person &person) = 0;
 
 protected:
-	// Time management
+	// time management
 	const int POWER_UP_TIME = 10;
 	int elapsedTime = 0;
 };
