@@ -64,6 +64,10 @@ public:
 		if(!hasActivated)
 			if(detectCollision(person))
 				activate(person);
+
+		else 
+			deactivate(person);
+		
 		move();
 	}
 
@@ -72,7 +76,9 @@ public:
 		if(!hasActivated)
 			window.draw(sprite);
 	}
-
+	
+	void deactivate(Person &person){}
+	
 	sf::Sprite getSprite() {
 		return this->sprite;
 	}

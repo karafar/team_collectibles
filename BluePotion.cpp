@@ -14,63 +14,30 @@
 
 public:
 	BluePotion() : Collectibles(){
-		loadSprite();
-		sprite.setTexture(texture);
-		sf::FloatRect spriteSize = sprite.getGlobalBounds();
-		sprite.setOrigin(spriteSize.width/2.0, spriteSize.height/2.0);
-		sprite.setPosition(x,y);
+		loadSprite("sprites/bluePotion.png");
 	}
 	
 	BluePotion(int x , int y) : Collectibles() {
-		loadSprite();
-                sprite.setTexture(texture);
-                sf::FloatRect spriteSize = sprite.getGlobalBounds();
-                sprite.setOrigin(spriteSize.width/2.0, spriteSize.height/2.0);
-                sprite.setPosition(x,y);
-		
 		this->x = x;
 		this->y = y;
-		elapsedTime = 0;
+
+		loadSprite("sprites/bluePotion.png");
+		
 	}
 
-
-	sf::Sprite getSprite(){
-		return this->sprite;
-	}
-
-	bool detectCollision(Person &person) {
-		return false;
-	}
-
-	void move() {
-		this->bounce *= -1;
-		y += bounce;
-		sprite.setPosition(x, y);	
-	}
 
 	void activate(Person &person) {
+
 		//slow the character
 	}
 
-	void update(Person &person) {
-		//to deactivate
-	}
-
-	void loadSprite() {
-		if(!texture.loadFromFile("sprites/bluePoition.png")) {
-			std::cout << "Failed to load bluePoition.png" << std::endl;
-                        exit(EXIT_FAILURE);
-                 }
-                 sprite.setTexture(texture);
+	void deactivate(Person &person) {
+	  	 sf::Time time = clock.getElapsedTime();
+                 sf::Int32 mills = time.asMilliseconds();
+                 if(mills % 5000 > 500) {
+                         //speed up character
+                 
+		 }
 
 	}
-
-private:
-	sf::Sprite sprite;
-	sf::Texture texture;
-
-	int bounce = 1;	
-	int x = 300;
-	int y = 300;
-
  };
