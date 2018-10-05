@@ -34,8 +34,23 @@ public:
 		return this->sprite;
 	}
 
-	void move(){}
-	void activate(Person &person){}
+	void move(){
+		sf::Time time = clock.getElapsedTime();
+		sf::Int32 mills = time.asMilliseconds();
+		if(mills % 1000 > 500) {
+			y += bounce;
+			sprite.setPosition(x, y);
+			bounce *= -1;
+			clock.restart();
+		}
+	}
+	void activate(Person &person){
+		int health = person.getHealth();
+		if(health <= 50) person.setHealth(health+50);
+		else person.setHealth(100);
+		hasActivated = true;
+	}
+
 	void loadSprite(){
 		if(!texture.loadFromFile("sprites/orangePoition.png"))
 		{
@@ -44,11 +59,24 @@ public:
 		}		
 	}
 
-	void update(Person &person){}
+	void update(Person &person){
+		if(!hasActivated)
+			if(detectCollision(person))
+				activate(person);
+		move();	
+	}
+
+	void render(sf::RenderWindow &window) {
+		if(!hasActivated)
+			window.draw(sprite);
+	}
 
 private:
-	sf::Sprite sprite;
-	sf::Texture texture;
-	int x = 300;
-	int y = 300;	
+//	sf::Sprite sprite;
+//	sf::Texture texture;
+//	int x = 300;
+//	int y = 300;	
+//	int bounce = 1;
+//	bool hasActivated = false;
+//	sf::Clock clock;
 };

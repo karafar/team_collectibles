@@ -13,9 +13,6 @@
 #include "Monster.hpp"
 #include "Settings.hpp"
 #include "OrangePotion.cpp"
-//myline
-#include "BluePotion.cpp"
-BluePotion bluePot(150,150);
 
 
 #include <iostream>
@@ -201,6 +198,7 @@ void Game::processEvents()
 void Game::update()
 {
 //	bluePot.move();
+	orangePot.update(player);
 	for(auto it = monsters.begin(); it != monsters.end(); ++it){
 		if(Collision::BoundingBoxTest(player.getSprite(), it->getSprite())){
 			player.harm(20);
@@ -244,9 +242,6 @@ void Game::render()
 	window.draw(scoreLabel);
 	window.draw(playerHealth);
 
-	bluePot.move();
-	window.draw(bluePot.getSprite());
-
-	window.draw(orangePot.getSprite());
+	orangePot.render(window);
 	window.display();
 }

@@ -4,6 +4,8 @@
 #define H__COLLECTIBLES__
 
 #include "SFML/Graphics.hpp"
+#include "SFML/System/Clock.hpp"
+#include "SFML/Window.hpp"
 #include "Person.hpp"
 
 class Collectibles {
@@ -26,9 +28,13 @@ public:
 	virtual void update(Person &person) = 0;
 
 protected:
-	// time management
-	const int POWER_UP_TIME = 10;
-	int elapsedTime = 0;
+	sf::Sprite sprite;
+	sf::Texture texture;
+	int x = 300;
+	int y = 300;
+	int bounce = 1;
+	bool hasActivated = false;
+	sf::Clock clock;
 };
 
 #endif
