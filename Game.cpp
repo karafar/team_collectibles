@@ -13,7 +13,7 @@
 #include "Monster.hpp"
 #include "Settings.hpp"
 #include "OrangePotion.cpp"
-
+#include "BluePotion.cpp"
 
 #include <iostream>
 #include <random>
@@ -21,7 +21,7 @@
 #include "SFML/Graphics.hpp"
 
 OrangePotion orangePot(100,200);
-
+BluePotion bluePot(200, 300);
 
 /*
  * Default constructor.  Creates our window and sets up
@@ -197,7 +197,7 @@ void Game::processEvents()
 
 void Game::update()
 {
-//	bluePot.move();
+	bluePot.update(player);
 	orangePot.update(player);
 	for(auto it = monsters.begin(); it != monsters.end(); ++it){
 		if(Collision::BoundingBoxTest(player.getSprite(), it->getSprite())){
@@ -242,6 +242,7 @@ void Game::render()
 	window.draw(scoreLabel);
 	window.draw(playerHealth);
 
+	bluePot.render(window);
 	orangePot.render(window);
 	window.display();
 }

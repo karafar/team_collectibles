@@ -61,11 +61,12 @@ public:
 	// Will be called each frame. Checks flags, calls move(), and \
 	activates if neccessary.
 	void update(Person &person) {
-		if(!hasActivated)
+		if(!hasActivated){
 			if(detectCollision(person))
 				activate(person);
 
-		else{ 
+		}
+		if(!hasDeactivated && hasActivated){ 
 			deactivate(person);
 		}
 		move();
@@ -90,6 +91,7 @@ protected:
 	int y = 300;
 	int bounce = 1;
 	bool hasActivated = false;
+	bool hasDeactivated = false;
 	sf::Clock clock;
 };
 

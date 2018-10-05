@@ -29,6 +29,8 @@ public:
 	void activate(Person &person) {
 
 		//slow the character
+		hasActivated = true;
+	
 	}
 
 	void deactivate(Person &person) {
@@ -38,6 +40,6 @@ public:
                          //speed up character
                  
 		 }
-
+		hasDeactivated = true;
 	}
  };
