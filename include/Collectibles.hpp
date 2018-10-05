@@ -65,9 +65,9 @@ public:
 			if(detectCollision(person))
 				activate(person);
 
-		else 
+		else{ 
 			deactivate(person);
-		
+		}
 		move();
 	}
 
