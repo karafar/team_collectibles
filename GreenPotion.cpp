@@ -1,34 +1,34 @@
+#include "SFML/Graphics.hpp"
 #include "include/Collectibles.hpp"
-#include "include/Collision.hpp"
-#include <stdio.h>
+#include "include/Person.hpp"
+#include <iostream>
+
 /************************************************************************
- * This is the green potion which gives health to the player
- *
- * @author Team Collectibles 
+ * This is the green potion that speeds up the player
+ * 
+ * @author Team Collectibles
  * @version October 6, 2018
  ************************************************************************/
-class GreenPotion: public Collectibles {
-public:
-	GreenPotion()
-	{   // loading image 
-		loadSprite("sprites/greenPoition.png");	
-	}
+ class GreenPotion: public Collectibles{
+     public:
 
-	// positioning the potion
-	GreenPotion(int x, int y)
-	: Collectibles()
-	{
-		this->x = x;
-		this->y = y;
-		loadSprite("sprites/greenPoition.png");
-	}
+     GreenPotion(){
+	 // loading the potion image 
+         loadSprite("sprites/greenPotion.png");
+     }
+     
+     // positioning the image 
+     GreenPotion(int x, int y): Collectibles(){
+         this->x = x;
+         this->y = y;
+         loadSprite("sprites/greenPotion.png");
+     }
 
-	// give health to the player
-	void activate(Person &person){
-		int health = person.getHealth();
-		// check if health is needed
-		if(health <= 50) person.setHealth(health+50);
-		else person.setHealth(100);
-		hasActivated = true;
-	}
-};
+     // activates the collectible and speeds up the player if it is hit
+     void activate(Person &person){
+        
+	     //speed up
+         
+	     hasActivated = true;
+     }
+ };
