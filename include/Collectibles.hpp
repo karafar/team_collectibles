@@ -25,12 +25,12 @@
 class Collectibles {
 public:
 
-	// Detects collision with a player.
+	/* Detects collision with a player. */
 	bool detectCollision(Person &person) {
 		return Collision::BoundingBoxTest(person.getSprite(), this->sprite);
 	}
 
-	// Moves the collectible up and down.
+	/* Moves the collectible up and down. */
 	void move() {
 		sf::Time time = clock.getElapsedTime();
 		sf::Int32 mills = time.asMilliseconds();
@@ -42,11 +42,11 @@ public:
 		}
 	}
 	
-	// When colliding with player, activate the collectibles powers.\
-	Collision detection is not handled here.
+	/* When colliding with player, activate the collectibles powers.
+	Collision detection is not handled here. */
 	virtual void activate(Person &person) = 0;
 
-	// Loads sprite to sprite field.
+	/* Loads sprite to sprite field. */
 	void loadSprite(const std::string filename) {
 		if(!texture.loadFromFile(filename)) {
 			printf("Failed to load texture: %s\n", filename.c_str());
@@ -58,8 +58,8 @@ public:
 		sprite.setPosition(x,y);
 	}
 	
-	// Will be called each frame. Checks flags, calls move(), and \
-	activates if neccessary.
+	/* Will be called each frame. Checks flags, calls move(), and 
+	(de)activates if neccessary. */
 	void update(Person &person) {
 		if(!hasActivated){
 			if(detectCollision(person))
@@ -72,26 +72,36 @@ public:
 		move();
 	}
 
-	// Recieves game's window, then draws the collectible.
+	/* Recieves game's window, then draws the collectible. */
 	void render(sf::RenderWindow &window) {
 		if(!hasActivated)
 			window.draw(sprite);
 	}
 	
+	/* After an elapsed time, a collectible will deactivate.
+	   Not all collectibles have effects that need to be deactivated. */
 	void deactivate(Person &person){}
 	
+	/* Returns sprite. */
 	sf::Sprite getSprite() {
 		return this->sprite;
 	}
 
 protected:
+	/* Sprite for dimensions, collisions, and rendering. */
 	sf::Sprite sprite;
+	/* Texture that is loaded into the sprite. */
 	sf::Texture texture;
+	/* (x,y) coordinates for positioning. Default coordinates (300, 300)*/
 	int x = 300;
 	int y = 300;
+	/* Height for bounce animation */
 	int bounce = 1;
+	/* Flags - When the collectible is picked up, it activates.
+	When the collectible is no longer in use, it deactivates */
 	bool hasActivated = false;
 	bool hasDeactivated = false;
+	/* Clock for animation and deactivation. */
 	sf::Clock clock;
 };
 
