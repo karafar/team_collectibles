@@ -28,7 +28,8 @@
      void activate(Person &person){
         
 	     //speed up
-         
+         int s = person.getSpeed();
+         person.setSpeed(s + 10.0);
 	     hasActivated = true;
      }
  };
