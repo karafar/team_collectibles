@@ -4,6 +4,10 @@
 #include "Person.hpp"
 #include "Monster.hpp"
 #include "SFML/Graphics.hpp"
+#include "../OrangePotion.cpp"
+#include "../BluePotion.cpp"
+#include "../GreenPotion.cpp"
+#include "../YellowPotion.cpp"
 #include <vector>
 
 class Game {
@@ -24,7 +28,12 @@ class Game {
 		sf::Text scoreLabel;
 		sf::Text playerHealth;	
         	sf::Font font;
-		
+
+		OrangePotion orangePotion;
+		BluePotion bluePotion;
+		YellowPotion yellowPotion;
+		GreenPotion greenPotion;
 };
+
 
 #endif

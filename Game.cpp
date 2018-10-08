@@ -1,6 +1,6 @@
 /*
  * Game.cpp
- * Much code taken from SFML utorials on SFML site.  Basic 
+ * Much code taken from SFML tutorials on SFML site.  Basic 
  * flow tutorial at 
  * from https://maksimdan.gitbooks.io/sfml-and-gamedevelopement/content/game_class.html
  *
@@ -12,24 +12,17 @@
 #include "Person.hpp"
 #include "Monster.hpp"
 #include "Settings.hpp"
-#include "OrangePotion.cpp"
-#include "BluePotion.cpp"
-#include "YellowPotion.cpp"
-
 #include <iostream>
 #include <random>
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
 
-OrangePotion orangePot(100,200);
-BluePotion bluePot(200, 300);
-YellowPotion yellowPot(300,400);
-
 /*
  * Default constructor.  Creates our window and sets up
  * initial state of shared variables.
  */
-Game::Game(){
+Game::Game() :
+	orangePotion(100,100), bluePotion(150,150), yellowPotion(200,200), greenPotion(75,75) {
 	// Creates the window.  We are using the same window for 
 	// the intro screen as the game, though this can change.
 	window.create(sf::VideoMode(WIDTH, HEIGHT + 100), "Not on my block.");
@@ -199,9 +192,11 @@ void Game::processEvents()
 
 void Game::update()
 {
-	bluePot.update(player);
-	orangePot.update(player);
-	yellowPot.update(player);
+	orangePotion.update(player);
+	bluePotion.update(player);
+	yellowPotion.update(player);
+	greenPotion.update(player);
+
 	for(auto it = monsters.begin(); it != monsters.end(); ++it){
 		if(Collision::BoundingBoxTest(player.getSprite(), it->getSprite())){
 			player.harm(20);
@@ -209,8 +204,6 @@ void Game::update()
 			std::random_device rd;
 			std::mt19937 engine(rd());
 			player.updatePosition(distribution(engine), distribution(engine));
-			
-	
 		}
 	}
 	if(player.getHealth() <= 0){
@@ -242,11 +235,14 @@ void Game::render()
 	playerHealth.setString("Health " + std::to_string(player.getHealth()));
 	playerHealth.setFillColor(sf::Color::White);
 	playerHealth.setPosition(300, HEIGHT + 40);
+
+	orangePotion.render(window);
+	bluePotion.render(window);
+	yellowPotion.render(window);
+	greenPotion.render(window);
+
 	window.draw(scoreLabel);
 	window.draw(playerHealth);
 
-	yellowPot.render(window);
-	bluePot.render(window);
-	orangePot.render(window);
 	window.display();
 }

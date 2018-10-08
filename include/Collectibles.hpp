@@ -24,7 +24,6 @@
 
 class Collectibles {
 public:
-
 	/* Detects collision with a player. */
 	bool detectCollision(Person &person) {
 		return Collision::BoundingBoxTest(person.getSprite(), this->sprite);
@@ -34,7 +33,7 @@ public:
 	void move() {
 		sf::Time time = clock.getElapsedTime();
 		sf::Int32 mills = time.asMilliseconds();
-		if(mills % 1000 > 500) {
+		if(mills /500 > 1) {
 			y += bounce;
 			sprite.setPosition(x, y);
 			bounce *= -1;

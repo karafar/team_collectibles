@@ -14,14 +14,14 @@
 
      GreenPotion(){
 	 // loading the potion image 
-         loadSprite("sprites/greenPotion.png");
+         loadSprite("sprites/greenPoition.png");
      }
      
      // positioning the image 
      GreenPotion(int x, int y): Collectibles(){
          this->x = x;
          this->y = y;
-         loadSprite("sprites/greenPotion.png");
+         loadSprite("sprites/greenPoition.png");
      }
 
      // activates the collectible and speeds up the player if it is hit
